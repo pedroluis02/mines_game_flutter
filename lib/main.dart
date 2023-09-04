@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
 
-import 'app.dart';
+import 'src/app.dart';
 
 Logger _log = Logger('main.dart');
 
