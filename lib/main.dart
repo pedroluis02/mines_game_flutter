@@ -9,8 +9,8 @@ import 'app.dart';
 Logger _log = Logger('main.dart');
 
 void main() {
-  _setup();
   WidgetsFlutterBinding.ensureInitialized();
+  _setup();
 
   runApp(const MyApp());
 }
