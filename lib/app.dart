@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatefulHookWidget {
   const MyHomePage({super.key, required this.title});
 
   final String title;
@@ -28,6 +29,13 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    final appLifeCycleState = useAppLifecycleState();
+    debugPrint('appLifeCycleState: ${appLifeCycleState?.name}');
+
+    useOnAppLifecycleStateChange((previous, current) {
+      debugPrint('useOnAppLifecycleStateChange: $current');
+    });
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
