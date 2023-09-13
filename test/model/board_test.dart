@@ -2,15 +2,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mines_game_flutter/src/model/models.dart';
 
 void main() {
-  group('table model creation', () {
+  group('board model creation', () {
     const sideLength = 4;
     late final Board model;
 
     setUpAll(() => model = SquareBoard(sideLength));
 
     test('check size', () {
-      const wanted = 16;
-      expect(model.size, wanted);
+      expect(model.size, sideLength * sideLength);
     });
 
     test('obtain cell by row and column', () {
