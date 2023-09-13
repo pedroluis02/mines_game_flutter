@@ -1,9 +1,9 @@
-class TableCellModel {
+class BoardCell {
   final int row;
   final int column;
   final bool state;
 
-  const TableCellModel(this.row, this.column, {this.state = false});
+  const BoardCell(this.row, this.column, {this.state = false});
 
   @override
   String toString() {
