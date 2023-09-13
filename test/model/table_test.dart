@@ -1,12 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mines_game_flutter/src/model/table.dart';
+import 'package:mines_game_flutter/src/model/models.dart';
 
 void main() {
   group('table model creation', () {
     const sideLength = 4;
-    late final TableModelOfBoard model;
+    late final Board model;
 
-    setUpAll(() => model = TableModelOfBoard(sideLength));
+    setUpAll(() => model = SquareBoard(sideLength));
 
     test('check size', () {
       const wanted = 16;
