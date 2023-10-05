@@ -5,14 +5,17 @@ import 'router.dart';
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  static final _router = buildRouter();
+  static final _router = MainGoRouterCreator().create();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Mines Game',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      theme: ThemeData.from(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.indigoAccent,
+          background: Colors.amberAccent,
+        ),
         useMaterial3: true,
       ),
       routeInformationProvider: _router.routeInformationProvider,
