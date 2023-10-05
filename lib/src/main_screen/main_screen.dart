@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../style/responsive_screen.dart';
@@ -23,14 +24,17 @@ class MainScreen extends HookConsumerWidget {
       body: ResponsiveScreen(
         mainAreaProminence: 0.45,
         squarishMainArea: _mainContent(),
-        rectangularMenuArea: _menuContent(),
+        rectangularMenuArea: _menuContent(context),
       ),
     );
   }
 
   Widget _mainContent() => _title();
 
-  Widget _menuContent() => _button('Play', onPressed: () {});
+  Widget _menuContent(BuildContext context) => _button(
+        'Play',
+        onPressed: () => GoRouter.of(context).go('/play'),
+      );
 
   Widget _title() {
     return Center(
