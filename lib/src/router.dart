@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mines_game_flutter/src/style/my_transition.dart';
 
 import 'main_screen/main_screen.dart';
 import 'play_session/play_session_screen.dart';
+import 'style/my_transition.dart';
 
 final class MainGoRouterCreator {
   GoRouter create() {
