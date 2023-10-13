@@ -25,7 +25,10 @@ class Board {
   static List<List<BoardCell>> _createCells(int rows, int columns) {
     return List.generate(
       rows,
-      (row) => List.generate(columns, (column) => BoardCell(row, column, state: true)).toList(),
+      (row) => List.generate(
+        columns,
+        (column) => BoardCell(row, column, state: BoardCellState.visible),
+      ).toList(),
     ).toList();
   }
 }
