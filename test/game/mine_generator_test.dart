@@ -1,22 +1,28 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mines_game_flutter/src/game/mine_generator/mine_generator.dart';
+import 'package:mines_game_flutter/src/game/mine_generator/mine_number_calculator.dart';
 
 void main() {
   group('MinesGenerator', () {
     const rows = 6;
     const columns = 6;
+
+    late final MineNumberCalculator lengthCalculator;
     late final MineGenerator generator;
 
-    setUpAll(() => generator = MineGenerator(rows, columns));
+    setUpAll(() {
+      lengthCalculator = MinesNumberByPercentage(20.0);
+      generator = MineGenerator(rows, columns, lengthCalculator: lengthCalculator);
+    });
 
     test('count should be length of cells', () {
-      final cells = generator.cells;
-      expect(generator.count, cells.length);
+      final length = lengthCalculator.compute(rows, columns);
+      expect(generator.length, length);
     });
 
     test('each cell should be inside range', () {
-      final cells = generator.cells;
-      for (final cell in cells) {
+      final result = generator.proposedResult;
+      for (final cell in result) {
         expect(_isInRangeFromOToMax(cell.row, rows), true);
         expect(_isInRangeFromOToMax(cell.column, columns), true);
       }
