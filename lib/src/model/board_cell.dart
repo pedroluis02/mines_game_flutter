@@ -1,4 +1,4 @@
-import 'package:mines_game_flutter/src/base/cell.dart';
+import '../base/cell.dart';
 
 enum BoardCellType { empty, number, mine }
 
