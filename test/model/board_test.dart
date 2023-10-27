@@ -32,7 +32,7 @@ void main() {
       'out each row boundary values should return assertion error',
       outBoundaryValues.rowSamples(),
       p1((int row) {
-        expect(() => model.allRow(row), throwsAssertionError);
+        expect(() => model.rowCells(row), throwsAssertionError);
       }),
     );
 
@@ -50,7 +50,7 @@ void main() {
       'all row values should get by row index',
       inBoundaryValues.rowSamples(),
       p1((int row) {
-        final allRow = model.allRow(row);
+        final allRow = model.rowCells(row);
         expect(allRow.length, rows);
       }),
     );
