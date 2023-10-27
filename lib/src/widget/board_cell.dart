@@ -40,6 +40,6 @@ class BoardCellView extends StatelessWidget {
   }
 
   Widget _contentWidget() {
-    return model.isVisible ? Text('${model.row},${model.column}') : const Text('');
+    return model.isMine ? const Text('M') : Text('${model.number}');
   }
 }

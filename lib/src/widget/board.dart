@@ -24,7 +24,7 @@ class BoardView extends StatelessWidget {
 
     for (var x = 0; x < model.rows; x++) {
       final rowItems =
-          model.allRow(x).map((cell) => BoardCellView(cell, onTap: onCellTap)).toList();
+          model.rowCells(x).map((cell) => BoardCellView(cell, onTap: onCellTap)).toList();
       widgets.add(
         Row(
           mainAxisSize: MainAxisSize.min,
