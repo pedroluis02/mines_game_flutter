@@ -4,30 +4,35 @@ import '../../base/cell.dart';
 import 'mine_number_calculator.dart';
 import 'mine_registry.dart';
 
-class MineGenerator {
+abstract class MineGenerator {
   final int rows;
   final int columns;
+  final MineNumberCalculator lengthCalculator;
 
-  late final MineNumberCalculator _lengthCalculator;
+  const MineGenerator(this.rows, this.columns, this.lengthCalculator);
 
+  int get proposedLength;
+
+  List<Cell> get proposedResult;
+}
+
+class DefaultMineGenerator extends MineGenerator {
   final _random = math.Random();
   final _registry = MineCellsRegistry();
 
-  MineGenerator(
-    this.rows,
-    this.columns, {
-    MineNumberCalculator? lengthCalculator,
-  }) {
-    _lengthCalculator = lengthCalculator ?? MinesNumberByPercentage(20.0);
+  DefaultMineGenerator(int rows, int columns, {MineNumberCalculator? lengthCalculator})
+      : super(rows, columns, lengthCalculator ?? MinesNumberByPercentage(20.0)) {
     _populate();
   }
 
-  int get length => proposedResult.length;
+  @override
+  int get proposedLength => _registry.length;
 
+  @override
   List<Cell> get proposedResult => _registry.toList();
 
   void _populate() {
-    int length = _lengthCalculator.compute(rows, columns);
+    int length = lengthCalculator.compute(rows, columns);
     int count = 0;
 
     while (count < length) {

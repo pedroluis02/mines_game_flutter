@@ -12,6 +12,8 @@ class MineCellsRegistry {
 
   String _createKey(Cell cell) => '${cell.row}-${cell.column}';
 
+  int get length => _cells.values.length;
+
   List<Cell> toList() => _cells.values.toList();
 }
 
