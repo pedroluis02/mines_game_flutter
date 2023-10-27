@@ -8,16 +8,16 @@ void main() {
     const columns = 6;
 
     late final MineNumberCalculator lengthCalculator;
-    late final MineGenerator generator;
+    late final DefaultMineGenerator generator;
 
     setUpAll(() {
       lengthCalculator = MinesNumberByPercentage(20.0);
-      generator = MineGenerator(rows, columns, lengthCalculator: lengthCalculator);
+      generator = DefaultMineGenerator(rows, columns, lengthCalculator: lengthCalculator);
     });
 
     test('count should be length of cells', () {
       final length = lengthCalculator.compute(rows, columns);
-      expect(generator.length, length);
+      expect(generator.proposedLength, length);
     });
 
     test('each cell should be inside range', () {
