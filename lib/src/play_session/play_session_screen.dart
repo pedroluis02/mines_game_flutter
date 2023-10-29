@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../base/dimension.dart';
 import '../game/board_creator.dart';
 import '../widget/board.dart';
 
 class PlaySessionScreen extends HookConsumerWidget {
-  static final _board = BoardCreator(10, 5).create();
+  static final _board = BoardCreator(Dimension.create(10, 5)).create();
 
   const PlaySessionScreen({super.key});
 

@@ -1,17 +1,18 @@
 import '../base/cell.dart';
+import '../base/dimension.dart';
 import 'board_cell.dart';
 import 'board_cells.dart';
 
 class Board {
   final BoardCellArray _cells;
 
-  int get size => (rows * columns);
+  int get size => _cells.dimension.size;
 
-  int get rows => _cells.rows;
+  int get rows => _cells.dimension.rows;
 
-  int get columns => _cells.columns;
+  int get columns => _cells.dimension.columns;
 
-  Board(int rows, int columns) : _cells = BoardCellArray(rows, columns);
+  Board(Dimension dimension) : _cells = BoardCellArray(dimension);
 
   const Board.withArray(BoardCellArray cells) : _cells = cells;
 

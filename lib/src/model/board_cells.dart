@@ -1,14 +1,14 @@
 import '../base/cell.dart';
+import '../base/dimension.dart';
 import 'board_cell.dart';
 
 class BoardCellArray {
-  final int rows;
-  final int columns;
+  final Dimension dimension;
   late final List<List<BoardCell>> _cells;
 
-  BoardCellArray(this.rows, this.columns) {
-    assert(rows > 0);
-    assert(columns > 0);
+  BoardCellArray(this.dimension) {
+    assert(dimension.rows > 0);
+    assert(dimension.columns > 0);
 
     _cells = _creteCells();
   }
@@ -30,9 +30,9 @@ class BoardCellArray {
 
   _creteCells() {
     return List.generate(
-      rows,
+      dimension.rows,
       (row) => List.generate(
-        columns,
+        dimension.columns,
         (column) => BoardCell(row, column),
       ).toList(),
     ).toList();
@@ -44,10 +44,10 @@ class BoardCellArray {
   }
 
   _assertRowInRange(int row) {
-    assert(row >= 0 && row < rows, '$row should be between 0 and ${rows - 1}');
+    assert(dimension.hasRow(row), '$row should be between 0 and ${dimension.rows - 1}');
   }
 
   _assertColumnInRange(int column) {
-    assert(column >= 0 && column < columns, '$column should be between 0 and ${columns - 1}');
+    assert(dimension.hasColumn(column), '$column should be between 0 and ${dimension.columns - 1}');
   }
 }

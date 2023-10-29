@@ -1,15 +1,15 @@
 import 'dart:math' as math;
 
 import '../../base/cell.dart';
+import '../../base/dimension.dart';
 import 'mine_number_calculator.dart';
 import 'mine_registry.dart';
 
 abstract class MineGenerator {
-  final int rows;
-  final int columns;
+  final Dimension dimension;
   final MineNumberCalculator lengthCalculator;
 
-  const MineGenerator(this.rows, this.columns, this.lengthCalculator);
+  const MineGenerator(this.dimension, this.lengthCalculator);
 
   int get proposedLength;
 
@@ -20,8 +20,8 @@ class DefaultMineGenerator extends MineGenerator {
   final _random = math.Random();
   final _registry = MineCellsRegistry();
 
-  DefaultMineGenerator(int rows, int columns, {MineNumberCalculator? lengthCalculator})
-      : super(rows, columns, lengthCalculator ?? MinesNumberByPercentage(20.0)) {
+  DefaultMineGenerator(Dimension dimension, {MineNumberCalculator? lengthCalculator})
+      : super(dimension, lengthCalculator ?? MinesNumberByPercentage(20.0)) {
     _populate();
   }
 
@@ -32,7 +32,7 @@ class DefaultMineGenerator extends MineGenerator {
   List<Cell> get proposedResult => _registry.toList();
 
   void _populate() {
-    int length = lengthCalculator.compute(rows, columns);
+    int length = lengthCalculator.compute(dimension);
     int count = 0;
 
     while (count < length) {
@@ -45,8 +45,8 @@ class DefaultMineGenerator extends MineGenerator {
   }
 
   Cell _nextProposedCell() {
-    final row = _nextValueInsideOf(0, rows - 1);
-    final column = _nextValueInsideOf(0, columns - 1);
+    final row = _nextValueInsideOf(0, dimension.rows - 1);
+    final column = _nextValueInsideOf(0, dimension.columns - 1);
     return Cell.crate(row, column);
   }
 

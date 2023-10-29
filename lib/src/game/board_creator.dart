@@ -1,18 +1,17 @@
-import 'package:mines_game_flutter/src/base/cell.dart';
-
+import '../base/cell.dart';
+import '../base/dimension.dart';
 import '../model/models.dart';
 import 'mine_generator/mine_generator.dart';
 
 class BoardCreator {
-  final int rows;
-  final int columns;
+  final Dimension dimension;
   final MineGenerator mineGenerator;
 
   final BoardCellArray _cells;
 
-  BoardCreator(this.rows, this.columns, {MineGenerator? mineGenerator})
-      : mineGenerator = mineGenerator ?? DefaultMineGenerator(rows, columns),
-        _cells = BoardCellArray(rows, columns);
+  BoardCreator(this.dimension, {MineGenerator? mineGenerator})
+      : mineGenerator = mineGenerator ?? DefaultMineGenerator(dimension),
+        _cells = BoardCellArray(dimension);
 
   Board create() {
     _generateAndFillMines();
@@ -29,8 +28,8 @@ class BoardCreator {
   }
 
   void _fillNumbers() {
-    for (var x = 0; x < rows; x++) {
-      for (var y = 0; y < columns; y++) {
+    for (var x = 0; x < dimension.rows; x++) {
+      for (var y = 0; y < dimension.columns; y++) {
         final cell = Cell.crate(x, y);
         if (_cells.cell(cell).isEmpty) {
           final count = _countMinesAround(cell);
@@ -45,7 +44,8 @@ class BoardCreator {
     int count = 0;
     for (var x = (cell.row - 1); x <= (cell.row + 1); x++) {
       for (var y = (cell.column - 1); y <= (cell.column + 1); y++) {
-        if (x >= 0 && y >= 0 && x < rows && y < columns && _cells.cell(Cell.crate(x, y)).isMine) {
+        final neighborCell = Cell.crate(x, y);
+        if (dimension.hasCell(neighborCell) && _cells.cell(neighborCell).isMine) {
           count++;
         }
       }

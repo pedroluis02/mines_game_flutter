@@ -1,7 +1,9 @@
 import 'dart:math';
 
+import '../../base/dimension.dart';
+
 abstract class MineNumberCalculator {
-  int compute(int rows, int columns);
+  int compute(Dimension dimension);
 }
 
 class MinesNumberByPercentage implements MineNumberCalculator {
@@ -17,7 +19,7 @@ class MinesNumberByPercentage implements MineNumberCalculator {
   bool _isValueValid(double value) => (value >= minValue) && (value <= maxValue);
 
   @override
-  int compute(int rows, int columns) {
-    return ((_value / 100) * (rows * columns)).floor();
+  int compute(Dimension dimension) {
+    return ((_value / 100) * dimension.size).floor();
   }
 }
