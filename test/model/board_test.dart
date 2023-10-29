@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mines_game_flutter/src/base/cell.dart';
 import 'package:mines_game_flutter/src/model/models.dart';
 import 'package:parameterized_test/parameterized_test.dart';
 
@@ -24,7 +25,7 @@ void main() {
       'out cell boundary values should return assertion error',
       outBoundaryValues.cellSamples(),
       p2((int row, int column) {
-        expect(() => model.cell(row, column), throwsAssertionError);
+        expect(() => model.cell(Cell.crate(row, column)), throwsAssertionError);
       }),
     );
 
@@ -40,9 +41,9 @@ void main() {
       'should get cell by row and cell index',
       inBoundaryValues.cellSamples(),
       p2((int row, int column) {
-        final cell = model.cell(row, column);
-        expect(cell.row, row);
-        expect(cell.column, column);
+        final boardCell = model.cell(Cell.crate(row, column));
+        expect(boardCell.row, row);
+        expect(boardCell.column, column);
       }),
     );
 
