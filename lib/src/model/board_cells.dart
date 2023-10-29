@@ -1,3 +1,4 @@
+import '../base/cell.dart';
 import 'board_cell.dart';
 
 class BoardCellArray {
@@ -12,22 +13,18 @@ class BoardCellArray {
     _cells = _creteCells();
   }
 
-  BoardCell cell(int row, int column) {
-    assert(row >= 0 && row < rows, '$row should be between 0 and ${rows - 1}');
-    assert(column >= 0 && column < columns, '$columns should be between 0 and ${columns - 1}');
-
-    return _cells[row][column];
+  BoardCell cell(Cell cell) {
+    _assertCellInRage(cell);
+    return _cells[cell.row][cell.column];
   }
 
-  void setCell(int row, int column, BoardCell newCell) {
-    assert(row >= 0 && row < rows, '$row should be between 0 and ${rows - 1}');
-    assert(column >= 0 && column < columns, '$columns should be between 0 and ${columns - 1}');
-
-    _cells[row][column] = newCell;
+  void setCell(BoardCell newCell) {
+    _assertCellInRage(newCell);
+    _cells[newCell.row][newCell.column] = newCell;
   }
 
   List<BoardCell> rowCells(int row) {
-    assert(row >= 0 && row < rows, '$row should be between 0 and ${rows - 1}');
+    _assertRowInRange(row);
     return _cells[row];
   }
 
@@ -39,5 +36,18 @@ class BoardCellArray {
         (column) => BoardCell(row, column),
       ).toList(),
     ).toList();
+  }
+
+  _assertCellInRage(Cell cell) {
+    _assertRowInRange(cell.row);
+    _assertColumnInRange(cell.column);
+  }
+
+  _assertRowInRange(int row) {
+    assert(row >= 0 && row < rows, '$row should be between 0 and ${rows - 1}');
+  }
+
+  _assertColumnInRange(int column) {
+    assert(column >= 0 && column < columns, '$column should be between 0 and ${columns - 1}');
   }
 }

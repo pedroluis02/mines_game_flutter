@@ -1,3 +1,4 @@
+import '../base/cell.dart';
 import 'board_cell.dart';
 import 'board_cells.dart';
 
@@ -14,7 +15,7 @@ class Board {
 
   const Board.withArray(BoardCellArray cells) : _cells = cells;
 
-  BoardCell cell(int row, int column) => _cells.cell(row, column);
+  BoardCell cell(Cell cell) => _cells.cell(cell);
 
   List<BoardCell> rowCells(int row) => _cells.rowCells(row);
 }
