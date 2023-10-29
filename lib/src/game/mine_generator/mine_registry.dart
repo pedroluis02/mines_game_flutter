@@ -16,12 +16,3 @@ class MineCellsRegistry {
 
   List<Cell> toList() => _cells.values.toList();
 }
-
-class ProposedMineCell extends AbstractCell {
-  const ProposedMineCell(int row, int column) : super(row, column);
-
-  @override
-  String toString() {
-    return 'Cell($row, $column)';
-  }
-}

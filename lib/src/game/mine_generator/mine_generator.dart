@@ -44,10 +44,10 @@ class DefaultMineGenerator extends MineGenerator {
     }
   }
 
-  ProposedMineCell _nextProposedCell() {
+  Cell _nextProposedCell() {
     final row = _nextValueInsideOf(0, rows - 1);
     final column = _nextValueInsideOf(0, columns - 1);
-    return ProposedMineCell(row, column);
+    return Cell.crate(row, column);
   }
 
   int _nextValueInsideOf(int min, int max) {
