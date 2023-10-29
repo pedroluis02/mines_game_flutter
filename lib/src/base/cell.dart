@@ -2,6 +2,8 @@ abstract class Cell {
   int get row;
 
   int get column;
+
+  factory Cell.crate(int row, int column) => _SimpleCell(row, column);
 }
 
 abstract class AbstractCell implements Cell {
@@ -17,4 +19,13 @@ abstract class AbstractCell implements Cell {
 
   @override
   int get column => _column;
+}
+
+class _SimpleCell extends AbstractCell {
+  const _SimpleCell(int row, int column) : super(row, column);
+
+  @override
+  String toString() {
+    return 'Cell($row, $column)';
+  }
 }
