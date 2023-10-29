@@ -1,8 +1,9 @@
-abstract class BoundaryBoardValues {
-  final int rows;
-  final int columns;
+import 'package:mines_game_flutter/src/base/dimension.dart';
 
-  const BoundaryBoardValues(this.rows, this.columns);
+abstract class BoundaryBoardValues {
+  final Dimension dimension;
+
+  const BoundaryBoardValues(this.dimension);
 
   int get minRow;
 
@@ -28,17 +29,17 @@ abstract class BoundaryBoardValues {
     ];
   }
 
-  factory BoundaryBoardValues.inside(int rows, int columns) {
-    return _InsideBoundaryBoardValues(rows, columns);
+  factory BoundaryBoardValues.inside(Dimension dimension) {
+    return _InsideBoundaryBoardValues(dimension);
   }
 
-  factory BoundaryBoardValues.outside(int rows, int columns) {
-    return _OutsideBoundaryBoardValues(rows, columns);
+  factory BoundaryBoardValues.outside(Dimension dimension) {
+    return _OutsideBoundaryBoardValues(dimension);
   }
 }
 
 class _InsideBoundaryBoardValues extends BoundaryBoardValues {
-  const _InsideBoundaryBoardValues(super.rows, super.columns);
+  const _InsideBoundaryBoardValues(super.dimension);
 
   @override
   int get minRow => 0;
@@ -47,14 +48,14 @@ class _InsideBoundaryBoardValues extends BoundaryBoardValues {
   int get minColumn => 0;
 
   @override
-  int get maxRow => (rows - 1);
+  int get maxRow => (dimension.rows - 1);
 
   @override
-  int get maxColumn => (columns - 1);
+  int get maxColumn => (dimension.columns - 1);
 }
 
 class _OutsideBoundaryBoardValues extends BoundaryBoardValues {
-  const _OutsideBoundaryBoardValues(super.rows, super.columns);
+  const _OutsideBoundaryBoardValues(super.dimension);
 
   @override
   int get minRow => -1;
@@ -63,8 +64,8 @@ class _OutsideBoundaryBoardValues extends BoundaryBoardValues {
   int get minColumn => -1;
 
   @override
-  int get maxRow => rows;
+  int get maxRow => dimension.rows;
 
   @override
-  int get maxColumn => columns;
+  int get maxColumn => dimension.columns;
 }

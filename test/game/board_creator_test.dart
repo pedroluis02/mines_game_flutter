@@ -1,27 +1,27 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mines_game_flutter/src/base/cell.dart';
+import 'package:mines_game_flutter/src/base/dimension.dart';
 import 'package:mines_game_flutter/src/game/board_creator.dart';
 import 'package:mines_game_flutter/src/game/mine_generator/mine_generator.dart';
 import 'package:mines_game_flutter/src/model/board.dart';
 
 void main() {
   group('BoardGenerator', () {
-    const rows = 6;
-    const columns = 6;
+    final dimension = Dimension.create(6, 5);
 
     late final BoardCreator creator;
     late final MineGenerator mineGenerator;
     late final Board board;
 
     setUpAll(() {
-      mineGenerator = DefaultMineGenerator(rows, columns);
-      creator = BoardCreator(rows, columns, mineGenerator: mineGenerator);
+      mineGenerator = DefaultMineGenerator(dimension);
+      creator = BoardCreator(dimension, mineGenerator: mineGenerator);
       board = creator.create();
     });
 
-    test('size should be rows x columns', () {
+    test('size should be dimension size', () {
       final board = creator.create();
-      expect(board.size, rows * columns);
+      expect(board.size, dimension.size);
     });
 
     test('mines number should equals generator', () {

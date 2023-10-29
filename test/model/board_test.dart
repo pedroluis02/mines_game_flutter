@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mines_game_flutter/src/base/cell.dart';
+import 'package:mines_game_flutter/src/base/dimension.dart';
 import 'package:mines_game_flutter/src/model/models.dart';
 import 'package:parameterized_test/parameterized_test.dart';
 
@@ -7,18 +8,17 @@ import 'boundary_board_values.dart';
 
 void main() {
   group('Board', () {
-    const rows = 4;
-    const columns = 4;
+    final dimension = Dimension.create(6, 5);
 
-    final inBoundaryValues = BoundaryBoardValues.inside(rows, columns);
-    final outBoundaryValues = BoundaryBoardValues.outside(rows, columns);
+    final inBoundaryValues = BoundaryBoardValues.inside(dimension);
+    final outBoundaryValues = BoundaryBoardValues.outside(dimension);
 
     late final Board model;
 
-    setUpAll(() => model = Board(rows, columns));
+    setUpAll(() => model = Board(dimension));
 
-    test('size should be (rows * columns)', () {
-      expect(model.size, rows * columns);
+    test('size should be dimension size', () {
+      expect(model.size, dimension.size);
     });
 
     parameterizedTest(
@@ -42,8 +42,7 @@ void main() {
       inBoundaryValues.cellSamples(),
       p2((int row, int column) {
         final boardCell = model.cell(Cell.crate(row, column));
-        expect(boardCell.row, row);
-        expect(boardCell.column, column);
+        expect(dimension.hasCell(boardCell), true);
       }),
     );
 
@@ -52,7 +51,7 @@ void main() {
       inBoundaryValues.rowSamples(),
       p1((int row) {
         final allRow = model.rowCells(row);
-        expect(allRow.length, rows);
+        expect(allRow.length, dimension.columns);
       }),
     );
   });
